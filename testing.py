@@ -1,4 +1,4 @@
-from Amdahl import Amdahl
+from amdahl import Amdahl
 from Pila import Pila
 
 def main():
