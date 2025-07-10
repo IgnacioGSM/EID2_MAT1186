@@ -1,7 +1,8 @@
 from Amdahll import Amdahl
+from Pila import Pila
 
 def main():
-    pila = []
+    pila = Pila()
 
     while True:
         nombre = input("Ingrese el nombre del proceso o elmento a mejorar (o 'salir' para terminar): ")
@@ -16,16 +17,14 @@ def main():
             aceleracion = amdahl_obj.aceleracion()
 
             print(f"La aceleración de {nombre} es: {aceleracion}")
-            pila.append((nombre, aceleracion))
+            pila.apilar((nombre, aceleracion))
 
-            if len(pila) > 3:
-                pila.pop(0)
 
         except ValueError as e:
                 print(f"Error: {e}")
         
     if pila:
-        ultimos = pila[::-1]
+        ultimos = pila.ver_x_elementos(len(pila) if len(pila) < 3 else 3)
 
         mejor_nombre = None
         mejor_aceleracion = -1
@@ -35,7 +34,7 @@ def main():
                 mejor_nombre = nombre
 
         print("\nConclusión:")
-        print(f"De los últimos {len(pila)} elementos ingresados,")
+        print(f"De los últimos {len(pila) if len(pila) < 3 else 3} elementos ingresados,")
         print(f"'{mejor_nombre}' es el más factible de mejorar, con aceleración de {mejor_aceleracion:.4f}x.")
     else:
         print("\nNo se ingresaron elementos para comparar.")

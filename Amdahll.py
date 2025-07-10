@@ -8,8 +8,9 @@ class Amdahl:
             raise ValueError("El porcentaje de mejora debe estar entre 0 y 1")
         if self.factor_de_mejora <= 0:
             raise ValueError("El factor de mejora debe ser mayor que 0")
-        
-        return 1 / (1 - self.porcentaje_de_mejora + self.porcentaje_de_mejora / self.factor_de_mejora)
+        self.aceleracion = 1 / ((1 - self.porcentaje_de_mejora) + (self.porcentaje_de_mejora / self.factor_de_mejora))
+
+        return self.aceleracion
 
 if __name__ == "__main__":
     # Ejemplo de uso
