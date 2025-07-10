@@ -16,7 +16,7 @@ with st.form("formulario_amdahl"):
 
     porcentaje = st.slider("Porcentaje mejorable (%)", min_value=0.0, max_value=100.0, step=0.1)
     
-    factor = st.slider("Factor de mejora (mayor que 0)", min_value=1, max_value=64)
+    factor = st.number_input("Factor de mejora (mayor que 0)", min_value=1)
 
     submit = st.form_submit_button("Calcular y agregar")
 
