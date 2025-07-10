@@ -1,16 +1,4 @@
-class Amdahl:
-    def __init__(self, f: float, k: float):
-        
-        self.f = f
-        self.k = k
-
-    def aceleracion(self):
-        
-        if not 0 <= self.f <= 1:
-            raise ValueError("f tiene que estar entre 0 y 1")
-        if self.k <= 0:
-            raise ValueError("k tiene que ser mayor que 0")
-        return 1 / (1 - self.f + self.f / self.k)
+from Amdahll import Amdahl
 
 def main():
     pila = []
@@ -20,14 +8,14 @@ def main():
         if nombre.lower() == 'salir':
             break
         try:
-            porcentaje = float(input(f"Ingrese el porcentaje mejorale de  {nombre} (entre 0 y 100): ")) / 100
+            porcentaje = float(input(f"Ingrese el porcentaje mejorale de  {nombre} (entre 0 y 100): "))
             factor = float(input(f"Ingrese el factor de mejora de {nombre} (mayor que 0): "))
 
             f = porcentaje / 100
             amdahl_obj = Amdahl(f, factor)
             aceleracion = amdahl_obj.aceleracion()
 
-            print(f"La aceleración de {nombre} es: {aceleracion:.4f}")
+            print(f"La aceleración de {nombre} es: {aceleracion}")
             pila.append((nombre, aceleracion))
 
             if len(pila) > 3:
