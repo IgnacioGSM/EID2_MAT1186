@@ -29,7 +29,7 @@ with st.form("formulario_amdahl"):
                 amdahl_obj = Amdahl(f, factor)
                 aceleracion = amdahl_obj.aceleracion()
 
-                st.session_state["pila"].apilar((nombre, aceleracion))
+                st.session_state["pila"].apilar((nombre, porcentaje, factor, aceleracion))
                 st.success(
                     f"✅ La aceleración de **{nombre}** es: **{aceleracion:.4f}x**"
                 )
@@ -47,11 +47,14 @@ if len(pila) > 0:
     st.table(
         {
             "Nombre": [item[0] for item in ultimos],
-            "Aceleración (x)": [f"{item[1]:.4f}" for item in ultimos],
+            "Porcentaje mejorable (%)": [f"{item[1]:.1f}" for item in ultimos],
+            "Factor de mejora": [f"{item[2]}" for item in ultimos],
+            "Aceleración (x)": [f"{item[3]:.4f}" for item in ultimos]
         }
     )
 
-    mejor_nombre, mejor_aceleracion = max(ultimos, key=lambda x: x[1])
+    mejor = max(ultimos, key=lambda x: x[3])
+    mejor_nombre, mejor_aceleracion = mejor[0], mejor[3]
 
     st.info(
         f"🔎 **Conclusión:** De los últimos {n} elementos ingresados, "
